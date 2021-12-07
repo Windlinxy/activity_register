@@ -6,7 +6,7 @@
 
     <resultMap id="BaseResultMap" type="com.bluemsun.entity.Activity">
             <id property="activityId" column="activity_id" jdbcType="INTEGER"/>
-            <result property="activityUser" column="activity_user" jdbcType="INTEGER"/>
+            <result property="activityUser" column="activity_user" jdbcType="VARCHAR"/>
             <result property="activityDate" column="activity_date" jdbcType="VARCHAR"/>
             <result property="activityName" column="activity_name" jdbcType="VARCHAR"/>
             <result property="activityTime" column="activity_time" jdbcType="VARCHAR"/>
@@ -29,7 +29,7 @@
         where  activity_user = #{activityUser}
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByPrimaryKey" parameterType="int">
         delete from tb_activity
         where  activity_id = #{activityId,jdbcType=INTEGER} 
     </delete>

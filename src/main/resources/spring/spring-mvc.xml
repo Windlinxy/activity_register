@@ -46,4 +46,5 @@
     <bean id="jsonResult" class="com.bluemsun.dto.JsonResult" />
 
     <bean id="userService" class="com.bluemsun.service.impl.UserServiceImpl" lazy-init="true"/>
+    <bean id="activityService" class="com.bluemsun.service.impl.ActivityServiceImpl" lazy-init="true"/>
 </beans>

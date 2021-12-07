@@ -2,10 +2,14 @@ package com.bluemsun.controller;
 
 import com.bluemsun.dto.JsonResult;
 import com.bluemsun.entity.Activity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.bluemsun.entity.User;
+import com.bluemsun.service.ActivityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @program: activity_register
@@ -19,11 +23,73 @@ import org.springframework.web.bind.annotation.RestController;
         produces = "application/json"
 )
 public class ActivityController {
+    @Autowired
+    private ActivityService activityService;
 
-//    @PostMapping(
-//            consumes = "application/json"
-//    )
-//    public JsonResult<Activity> submitActivity(@RequestBody Activity activity){
-//
-//    }
+    @PostMapping(
+            consumes = "application/json"
+    )
+    public JsonResult<Activity> submitActivity(HttpServletRequest request, @RequestBody Activity activity) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(session.getId());
+        activity.setActivityUser(user.getUsername());
+        if(activityIsRight(activity) && activityService.addActivity(activity) == 1 ){
+            return new JsonResult<Activity>().ok();
+        }else {
+            return new JsonResult<Activity>().fail();
+        }
+    }
+
+    @GetMapping()
+    public JsonResult<List<Activity>> getActivity(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute(session.getId());
+        List<Activity> list = activityService.queryActivitiesByUsername(user.getUsername());
+        if(list != null){
+            return new JsonResult<List<Activity>>().ok(list);
+        }else {
+            return new JsonResult<List<Activity>>().fail();
+        }
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public JsonResult<Object> deleteActivity(@PathVariable("id") int id){
+       if(activityService.deleteActivityById(id) == 1){
+           return new JsonResult<Object>().ok();
+       }else {
+           return new JsonResult<Object>().fail();
+       }
+    }
+
+    @PatchMapping( consumes = "application/json")
+    public JsonResult<Activity> changActivityInfo(HttpServletRequest request, @RequestBody Activity activity) {
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute(session.getId());
+        activity.setActivityUser(user.getUsername());
+        if(activityIsRight(activity) && activityService.changeActivity(activity) == 1 ){
+            return new JsonResult<Activity>().ok();
+        }else {
+            return new JsonResult<Activity>().fail();
+        }
+    }
+
+    private boolean activityIsRight(Activity activity) {
+        if (activity.getActivityDate() == null) {
+            return false;
+        } else if (activity.getActivityName() == null) {
+            return false;
+        } else if (activity.getActivityMaster() == null) {
+            return false;
+        } else if (activity.getActivityTime() == null) {
+            return false;
+        } else if (activity.getActivityReferences() == null) {
+            return false;
+        } else if (activity.getActivityTakeWay() == null) {
+            return false;
+        } else if (activity.getActivityUser() == null) {
+            return false;
+        }else {
+            return true;
+        }
+    }
 }

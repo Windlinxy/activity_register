@@ -41,9 +41,8 @@ public class UserController {
         if (userInDatabase != null){
             HttpSession session = request.getSession();
             System.out.println(session.getId());
-            session.setAttribute(session.getId(), user.getPassword());
-            user.setPassword(null);
-            return new JsonResult<User>().ok(user);
+            session.setAttribute(session.getId(), user);
+            return new JsonResult<User>().ok(new User(user.getUsername(),null));
 
         } else {
             return new JsonResult<User>().fail("登录失败");
@@ -65,15 +64,15 @@ public class UserController {
         }
         HttpSession session = request.getSession();
         System.out.println(session.getId());
-        String oldPassword = (String)session.getAttribute(session.getId());
-        System.out.println(user);
-        System.out.println(oldPassword);
+        User userInSession = (User)session.getAttribute(session.getId());
+        String oldPassword = userInSession.getPassword();
+        System.out.println(user.getNewPassword());
+        System.out.println(userInSession);
         if(oldPassword != null && oldPassword.equals(user.getOldPassword())){
             User user1 = new User(user.getUsername(),user.getNewPassword());
             if(userService.changeUserPassword(user1) == 1){
-                session.setAttribute(user.getUsername(), user1);
-                user1.setPassword(null);
-                return new JsonResult<User>().ok(user1);
+                session.setAttribute(session.getId(), user1);
+                return new JsonResult<User>().ok(new User(user1.getUsername(),null));
             }else {
                 System.out.println(2);
                 return new JsonResult<User>().fail("失败");
