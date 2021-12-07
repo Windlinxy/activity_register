@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bluemsun.mapper.ActivityMapper">
+
+    <resultMap id="BaseResultMap" type="com.bluemsun.entity.Activity">
+            <id property="activityId" column="activity_id" jdbcType="INTEGER"/>
+            <result property="activityUser" column="activity_user" jdbcType="INTEGER"/>
+            <result property="activityDate" column="activity_date" jdbcType="VARCHAR"/>
+            <result property="activityName" column="activity_name" jdbcType="VARCHAR"/>
+            <result property="activityTime" column="activity_time" jdbcType="VARCHAR"/>
+            <result property="activityTakeWay" column="activity_take_way" jdbcType="VARCHAR"/>
+            <result property="activityMaster" column="activity_master" jdbcType="VARCHAR"/>
+            <result property="activityReferences" column="activity_references" jdbcType="VARCHAR"/>
+            <result property="activityVoluntary" column="activity_voluntary" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        activity_id,activity_user,activity_date,
+        activity_name,activity_time,activity_take_way,
+        activity_master,activity_references,activity_voluntary
+    </sql>
+
+    <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_activity
+        where  activity_user = #{activityUser}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from tb_activity
+        where  activity_id = #{activityId,jdbcType=INTEGER} 
+    </delete>
+
+    <insert id="insert" keyColumn="activity_id" keyProperty="activityId" parameterType="com.bluemsun.entity.Activity" useGeneratedKeys="true">
+        insert into tb_activity
+        (activity_user,activity_date
+        ,activity_name,activity_time,activity_take_way
+        ,activity_master,activity_references,activity_voluntary)
+
+        values (#{activityUser,jdbcType=INTEGER},#{activityDate,jdbcType=VARCHAR}
+        ,#{activityName,jdbcType=VARCHAR},#{activityTime,jdbcType=VARCHAR},#{activityTakeWay,jdbcType=VARCHAR}
+        ,#{activityMaster,jdbcType=VARCHAR},#{activityReferences,jdbcType=VARCHAR},#{activityVoluntary,jdbcType=TINYINT}
+        )
+    </insert>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bluemsun.entity.Activity">
+        update tb_activity
+        <set>
+                <if test="activityUser != null">
+                    activity_user = #{activityUser},
+                </if>
+                <if test="activityDate != null">
+                    activity_date = #{activityDate},
+                </if>
+                <if test="activityName != null">
+                    activity_name = #{activityName},
+                </if>
+                <if test="activityTime != null">
+                    activity_time = #{activityTime},
+                </if>
+                <if test="activityTakeWay != null">
+                    activity_take_way = #{activityTakeWay},
+                </if>
+                <if test="activityMaster != null">
+                    activity_master = #{activityMaster},
+                </if>
+                <if test="activityReferences != null">
+                    activity_references = #{activityReferences},
+                </if>
+                <if test="activityVoluntary != null">
+                    activity_voluntary = #{activityVoluntary},
+                </if>
+        </set>
+        where   activity_id = #{activityId}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bluemsun.entity.Activity">
+        update tb_activity
+        set 
+            activity_user =  #{activityUser},
+            activity_date =  #{activityDate},
+            activity_name =  #{activityName},
+            activity_time =  #{activityTime},
+            activity_take_way =  #{activityTakeWay},
+            activity_master =  #{activityMaster},
+            activity_references =  #{activityReferences},
+            activity_voluntary =  #{activityVoluntary}
+        where   activity_id = #{activityId}
+    </update>
+</mapper>
