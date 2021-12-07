@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * @description: 用户实体类
  *
- * @author: 姚斯腾
+ * @author: windlinxy
  * @create: 2021-12-05 15:42
  **/
 @Data
@@ -35,12 +35,4 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }

@@ -1,6 +1,5 @@
 package com.bluemsun.filter;
 
-import com.bluemsun.dto.JsonResult;
 import com.google.gson.Gson;
 
 import javax.servlet.*;
@@ -16,7 +15,7 @@ import java.util.Map;
  * CORS跨域过滤器
  *
  * @description: CORS跨域过滤器
- * @author: 姚斯腾
+ * @author: Windlinxy
  * @create: 2021-10-08 14:22
  **/
 public class LoginCheckFilter implements Filter {

@@ -30,13 +30,4 @@ public class UserPasswordJud {
     public UserPasswordJud() {
     }
 
-    @Override
-    public String toString() {
-        return "UserPasswordJud{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
-                ", oldPassword='" + oldPassword + '\'' +
-                ", newPassword='" + newPassword + '\'' +
-                '}';
-    }
 }

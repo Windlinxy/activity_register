@@ -15,7 +15,7 @@ import java.util.Objects;
 
 /**
  * @description: 用户controller
- * @author: 姚斯腾
+ * @author: Windlinxy
  * @create: 2021-12-05 15:42
  **/
 @RestController

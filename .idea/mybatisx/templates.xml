@@ -6,7 +6,7 @@
         <option name="generateConfig">
           <GenerateConfig>
             <option name="annotationType" value="NONE" />
-            <option name="basePackage" value="generator" />
+            <option name="basePackage" value="com.bluemsun" />
             <option name="basePath" value="src/main/java" />
             <option name="encoding" value="UTF-8" />
             <option name="extraClassSuffix" value="" />
