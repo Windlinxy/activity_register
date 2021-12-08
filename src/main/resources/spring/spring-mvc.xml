@@ -47,4 +47,5 @@
 
     <bean id="userService" class="com.bluemsun.service.impl.UserServiceImpl" lazy-init="true"/>
     <bean id="activityService" class="com.bluemsun.service.impl.ActivityServiceImpl" lazy-init="true"/>
+    <bean id="feelingService" class="com.bluemsun.service.impl.FeelingServiceImpl" lazy-init="true"/>
 </beans>

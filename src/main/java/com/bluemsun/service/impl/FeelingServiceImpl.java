@@ -1,27 +1,28 @@
 package com.bluemsun.service.impl;
 
 import com.bluemsun.entity.Activity;
-import com.bluemsun.mapper.ActivityMapper;
-import com.bluemsun.service.ActivityService;
+import com.bluemsun.entity.Feeling;
+import com.bluemsun.mapper.FeelingMapper;
+import com.bluemsun.service.FeelingService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 /**
  * @program: activity_register
- * @description: 活动服务实现类
+ * @description: 感悟服务接口实现类
  * @author: Windlinxy
- * @create: 2021-12-07 15:41
+ * @create: 2021-12-08 18:43
  **/
-public class ActivityServiceImpl implements ActivityService {
+public class FeelingServiceImpl implements FeelingService {
     @Autowired
-    private ActivityMapper mapper;
+    private FeelingMapper mapper;
 
     @Override
-    public int addActivity(Activity activity) {
+    public int addFeeling(Feeling record) {
         int jud = 0;
         try {
-            mapper.insert(activity);
+            mapper.insert(record);
             jud = 1;
         }catch (Exception e){
             throw new RuntimeException(e);
@@ -30,13 +31,13 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Activity> queryActivitiesByUsername(String username) {
-        List<Activity> dataList;
+    public List<Feeling> queryFeelingByUsername(String username) {
+        List<Feeling> dataList;
         if (username == null){
             return null;
         }
         try{
-            dataList = mapper.selectByUsername(username);
+            dataList = mapper.selectAllByUsername(username);
         }catch (Exception e){
             throw new RuntimeException(e);
         }
@@ -44,7 +45,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public int deleteActivityById(int id) {
+    public int deleteFeelingById(int id) {
         int jud = 0;
         try{
             jud = mapper.deleteByPrimaryKey(id);
@@ -53,11 +54,12 @@ public class ActivityServiceImpl implements ActivityService {
         }
         return jud;
     }
+
     @Override
-    public int changeActivity(Activity activity) {
+    public int changeFeeling(Feeling record) {
         int jud = 0;
         try{
-            jud = mapper.updateByPrimaryKey(activity);
+            jud = mapper.updateByPrimaryKey(record);
         }catch (Exception e){
             throw new RuntimeException(e);
         }

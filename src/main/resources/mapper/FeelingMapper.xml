@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bluemsun.mapper.FeelingMapper">
+
+    <resultMap id="BaseResultMap" type="com.bluemsun.entity.Feeling">
+        <id property="feelingId" column="feeling_id" jdbcType="INTEGER"/>
+        <result property="feelingUser" column="feeling_user" jdbcType="VARCHAR"/>
+        <result property="feelingYear" column="feeling_year" jdbcType="INTEGER"/>
+        <result property="feelingSelfJud" column="feeling_self_jud" jdbcType="VARCHAR"/>
+        <result property="feelingContent" column="feeling_content" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        feeling_id,feeling_user,feeling_year,
+        feeling_self_jud,feeling_content
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_feeling
+        where feeling_id = #{feelingId}
+    </select>
+
+    <select id="selectAllByUsername" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_feeling
+        where feeling_user = #{feelingUser}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="int">
+        delete
+        from tb_feeling
+        where feeling_id = #{feelingId}
+    </delete>
+
+    <insert id="insert" parameterType="com.bluemsun.entity.Feeling">
+        insert into tb_feeling(
+                feeling_user,
+                feeling_year,
+                feeling_self_jud,
+                feeling_content)
+        values (
+            #{feelingUser},
+            #{feelingYear},
+            #{feelingSelfJud},
+            #{feelingContent}
+            )
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.bluemsun.entity.Feeling">
+        update tb_feeling
+        set feeling_user     = #{feelingUser,jdbcType=VARCHAR},
+            feeling_year     = #{feelingYear,jdbcType=INTEGER},
+            feeling_self_jud = #{feelingSelfJud,jdbcType=VARCHAR},
+            feeling_content  = #{feelingContent,jdbcType=VARCHAR}
+        where feeling_id = #{feelingId,jdbcType=INTEGER}
+    </update>
+</mapper>

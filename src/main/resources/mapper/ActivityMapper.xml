@@ -34,7 +34,7 @@
         where  activity_id = #{activityId,jdbcType=INTEGER} 
     </delete>
 
-    <insert id="insert" keyColumn="activity_id" keyProperty="activityId" parameterType="com.bluemsun.entity.Activity" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.bluemsun.entity.Activity">
         insert into tb_activity
         (activity_user,activity_date
         ,activity_name,activity_time,activity_take_way

@@ -5,11 +5,9 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @description: 用户实体类
  *
- * @author: windlinxy
- * @create: 2021-12-05 15:42
- **/
+ * @TableName tb_user
+ */
 @Data
 public class User implements Serializable {
     /**
@@ -27,8 +25,7 @@ public class User implements Serializable {
      */
     private String password;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String username, String password) {
         this.username = username;

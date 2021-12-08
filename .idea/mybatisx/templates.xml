@@ -39,13 +39,13 @@
               </list>
             </option>
             <option name="needsComment" value="true" />
-            <option name="relativePackage" value="com.bluemsun.entity" />
+            <option name="relativePackage" value="entity" />
             <option name="superClass" value="" />
             <option name="tableUIInfoList">
               <list>
                 <TableUIInfo>
-                  <option name="className" value="Activity" />
-                  <option name="tableName" value="tb_activity" />
+                  <option name="className" value="Feeling" />
+                  <option name="tableName" value="tb_feeling" />
                 </TableUIInfo>
               </list>
             </option>

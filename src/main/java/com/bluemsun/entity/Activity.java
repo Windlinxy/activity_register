@@ -55,8 +55,7 @@ public class Activity implements Serializable {
      */
     private int activityVoluntary;
 
-    public Activity() {
-    }
+    public Activity() {}
 
     public Activity(String activityUser, String activityDate, String activityName, String activityTime, String activityTakeWay, String activityMaster, String activityReferences, int activityVoluntary) {
         this.activityUser = activityUser;
