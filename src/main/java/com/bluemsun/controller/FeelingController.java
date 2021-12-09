@@ -118,7 +118,9 @@ public class FeelingController {
             return false;
         } else if (feeling.getFeelingYear() == null) {
             return false;
-        } else {
+        } else if(feeling.getFeelingMood() == null){
+            return false;
+        }else {
             return feeling.getFeelingSelfJud() != null;
         }
     }

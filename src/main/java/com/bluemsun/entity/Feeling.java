@@ -26,6 +26,11 @@ public class Feeling implements Serializable {
     private Integer feelingYear;
 
     /**
+     * 心情
+     */
+    private String feelingMood;
+
+    /**
      * 自我评价
      */
     private String feelingSelfJud;
